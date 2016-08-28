@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Angular SWPA by krell1983</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/style.min.css" />
+
+    </head>
+    <body>
+        <div class="background"></div>       
+        <div class="Title">Currency Calculator</div>
+
+
+        <div class="webpage" data-ng-app="Currency_Exchange" data-ng-init="Select_Currency_1 = 'GBP';Select_Currency_2 = 'PLN'">
+
+
+            <div class="content" ng-controller="Currency_Exchange_Controller">
+
+
+                <!-- Currency Select -->
+                <div class="box Grid_Row"> 
+
+                    <h1>Select Currency</h1>
+
+                    <div class="XS_Grid_1x1 M_Grid_1x2">
+                        <span class="small">from</span> 
+                        <select ng-model="Select_Currency_1" ng-change="Load_New_Data();"> 
+                            <option ng-repeat = "currency in currency_list" value="{{ currency.code}}">
+
+                                [{{ currency.country}}] {{ currency.name}} 
+
+                            </option>
+                        </select>  
+
+
+                    </div>
+                    <span class="small">to</span> 
+                    <div class="XS_Grid_1x1 M_Grid_1x2"> 
+                        <select ng-model="Select_Currency_2"  ng-change="Load_New_Data();">
+                            <option ng-repeat = "currency in currency_list" value="{{ currency.code}}">
+
+                              [{{ currency.country}}] {{ currency.name}} 
+
+                            </option>
+                        </select>  
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Excagne Rates -->
+                <div class="box Grid_Row Excange">  
+
+                    <h1>Excange Rates</h1>
+
+                    <div class="XS_Grid_1x2">
+
+                        <span class="title"> Name: </span><span class="data" ng-bind="CurrencyExcange[0].Name"></span> <br>
+                        <span class="title"> Rate: </span><span class="data" ng-bind="Currency_Excange_Rate_1"></span>
+
+                    </div>
+
+                    <div class="XS_Grid_1x2">
+
+                        <span class="title"> Name: </span><span class="data" ng-bind="CurrencyExcange[1].Name"></span> <br>
+                        <span class="title"> Rate: </span><span class="data" ng-bind="Currency_Excange_Rate_2"></span>
+
+                    </div>
+
+                </div>  
+
+
+                <!-- Currency Imput -->
+                <div class="box Grid_Row Value" ng-init="Currency_Imput_1 = 100; Currency_Imput_2 = 0;"  >
+
+                    <h1>Excange Value </h1>       
+
+
+                    <div class="XS_Grid_1x1 M_Grid_1x2">
+
+                        <div ng-repeat = "currency in currency_list"> 
+                            <span class="small" ng-if="Select_Currency_1 === currency.code"> {{currency.name_plural}} <span class="BIG">{{Currency_Imput_1}}</span> {{currency.symbol_native}}</span>
+                        </div>     
+
+                        <input  type="text" ng-focus="Select_Imput = 1" ng-model="Currency_Imput_1" ng-change="calculate_currency(Select_Imput)">    
+
+                    </div>
+
+
+                    <div class="XS_Grid_1x1 M_Grid_1x2" ng-click="Select_Imput = 2">
+
+                        <div ng-repeat = "currency in currency_list"> 
+                            <span class="small" ng-if="Select_Currency_2 === currency.code"> {{currency.name_plural}} <span class="BIG">{{Currency_Imput_2}}</span> {{currency.symbol_native}}</span>
+                        </div> 
+                        <input  type="text" ng-focus="Select_Imput = 2" ng-model="Currency_Imput_2" ng-change="calculate_currency(Select_Imput)">  
+
+                    </div> 
+
+
+
+                </div>  
+
+
+
+
+
+
+
+
+
+
+            </div>  
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <script src="js/angular.min.js"></script>
+        <script src="js/scripts.js"></script>
+
+
+
+
+    </body>
+</html>
